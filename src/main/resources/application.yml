@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/member?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: admin
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  security:
+   user:
+    name: user-name
+    password: user-password
+
+  jpa:
+    database: mysql
+    properties:
+      hibernate:
+        ddl-auto: create
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+
+logging:
+  level:
+    org:
+      hibernate: info
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
