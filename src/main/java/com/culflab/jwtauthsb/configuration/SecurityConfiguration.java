@@ -29,7 +29,12 @@ public class SecurityConfiguration {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authReq -> authReq
-                        .requestMatchers( new AntPathRequestMatcher("/api/v1/auth/**") ).permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/api/v1/auth/**"),
+                                new AntPathRequestMatcher("/swagger*/**"),
+                                new AntPathRequestMatcher("/api-docs/**"),
+                                new AntPathRequestMatcher("/favicon.ico")
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->  sessionManagement

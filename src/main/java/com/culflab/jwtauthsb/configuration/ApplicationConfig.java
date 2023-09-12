@@ -1,7 +1,10 @@
 package com.culflab.jwtauthsb.configuration;
 
 import com.culflab.jwtauthsb.member.repository.MemberRepository;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @RequiredArgsConstructor
@@ -42,5 +44,23 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public GroupedOpenApi publicApi(){
+        return GroupedOpenApi.builder()
+                .group("v1")
+                .pathsToMatch("/**")
+                .build();
+    }
+
+    @Bean
+    public OpenAPI jwtAuthSb(){
+        return new OpenAPI()
+                .info(new Info()
+                        .title("title")
+                        .description("SPRING SECURITY + JWT + SWAGGER 적용")
+                        .version("v1.0")
+                );
     }
 }
