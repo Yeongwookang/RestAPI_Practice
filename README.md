@@ -1,38 +1,31 @@
 # RestAPI_Practice
 Spring Security+JWT Token+RESTAPI
 
-## JWT (JSON Web Token)
+---
+title : SpringBoot로 RestAPI 구현하기
+date : 2023-05-22 00:00:00 +09:00
+categories : [Backend]
+tags : [study, backend, oop] 
+mermaid: true
+---
 
-### 장점
-- 서버의 부담을 크게 덜어줌
-- 암호화된 토큰을 사용해 안전한 통신 가능
-- 토큰 발행 전용 서버를 개설해 서버의 부담 완화 가능
-- 토큰에 특정 권한을 심을 수 있음
+## 개요
+[프로젝트 기간] 2023-09-11 ~ 2023-09-13
+[프로젝트 내용] SpringBoot로 RestAPI 구현하기
+[프로젝트 기여도] 100%
+[프로젝트 링크] RestAPI_Pratice : [https://github.com/Yeongwookang/RestAPI_Practice.git](https://github.com/Yeongwookang/RestAPI_Practice.git)
 
-### 단점
-- 여러 기기에서 로그인 하는 경우 통제 불가
-- 토큰 탈취시 무효화 하는 기능이 없음
+## 기술스택
+- back-end : ```SpringBoot``` , ```JPA```, ```SpringSecurity```
+- DB: ```MySQL```
 
-### 종류
-- ```Access Token``` : 사용자 정보에 접근
-- ```Refresh Token``` : Access Token 갱신 용도
+## 기술을 선정한 이유
 
-```Refresh Token```을 서버에 저장하고 ```Access Token```, ```Refresh Token``` 모두를 발급하는 경우, ```Access Token```의 주기를 짧게주고 (몇분 정도), ```Access Token```이 만료되었을때 ```Refresh Token```을 제출하게 되는데, 이때 DB의 값과 대조하여 ```Access Token```을 다시 부여한다. 
-
-### 구조
-- ```Header``` : 토큰 타입 지정/ 알고리즘 명시
-- ```Payload``` : 토큰에 권한 부여, 사용자 정보를 선택해 담을 수 있다.
-- ```Signature``` : 개발자의 암호키가 들어간다.
-
-### 절차
-1. 사용자 로그인 요청
-2. 서버에서 암호화된 토큰 생성
-3. 사용자는 토큰을 저장
-4. 이 후 모든 요청에 토큰을 태워 요청함
-5. 서버는 토큰을 가지고 사용자 식별
-
-
-## Architecture
+### Restful API + JWT 토큰 방식
+- 세션을 사용하지 않아도 되서 구현이 단순해짐
+- 협업이 편해짐
+- RESTful API를 위해서 세션방식을 사용할 수 없었음
+- DB 의존적인 구조를 벗어나기 위해
 
 ```mermaid
 flowchart TD
@@ -50,8 +43,12 @@ b-->|InvalidJWT_403|a
 f-->|JSON_200|a
 ```
 
-## Reference
+## RESTful API 개발내용
+Todo List를 CRUD 해주는 RestfulAPI 개발
 
-- 세션 vs 토큰 vs 쿠키? 기초개념 잡아드림. 10분 순삭[https://www.youtube.com/watch?v=tosLBcAX1vk](https://www.youtube.com/watch?v=tosLBcAX1vk)
-- JWT 대충 쓰면 님들 코딩인생 끝남 [https://www.youtube.com/watch?v=XXseiON9CV0](https://www.youtube.com/watch?v=XXseiON9CV0)
-- JWT 토큰 사용법 [https://www.youtube.com/watch?v=St8XcfmWqnw](https://www.youtube.com/watch?v=St8XcfmWqnw)
+## DB 설계
+member Table이 전부이다.
+
+
+## Reference
+- 
