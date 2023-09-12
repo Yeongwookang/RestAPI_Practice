@@ -1,14 +1,6 @@
 # RestAPI_Practice
 Spring Security+JWT Token+RESTAPI
 
----
-title : Spring Security + JWT 인증 개념
-date : 2023-09-05 00:00:00 +09:00
-categories : [Java, Spring]
-tags : [study, java, spring] 
-mermaid: true
----
-
 ## JWT (JSON Web Token)
 
 ### 장점
