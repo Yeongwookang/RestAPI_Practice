@@ -8,7 +8,8 @@ Spring Security+JWT Token+RESTAPI
 - [프로젝트 링크] [https://github.com/Yeongwookang/RestAPI_Practice.git](https://github.com/Yeongwookang/RestAPI_Practice.git)
 
 ## 기술스택
-- back-end : ```SpringBoot``` , ```JPA```, ```SpringSecurity```
+- back-end : ```SpringBoot```
+- library: ```JPA```, ```SpringSecurity```, ```jjwt```
 - DB: ```MySQL```
 
 ## 기술을 선정한 이유
