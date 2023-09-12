@@ -1,5 +1,5 @@
 # RestAPI_Practice
-Spring Security+JWT Token+RESTAPI
+Spring Security+JWT+RESTAPI
 
 ## 개요
 - [프로젝트 기간] 2023-09-11 ~ 2023-09-13
