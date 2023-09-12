@@ -1,14 +1,6 @@
 # RestAPI_Practice
 Spring Security+JWT Token+RESTAPI
 
----
-title : SpringBoot로 RestAPI 구현하기
-date : 2023-05-22 00:00:00 +09:00
-categories : [Backend]
-tags : [study, backend, oop] 
-mermaid: true
----
-
 ## 개요
 [프로젝트 기간] 2023-09-11 ~ 2023-09-13
 [프로젝트 내용] SpringBoot로 RestAPI 구현하기
