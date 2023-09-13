@@ -3,7 +3,6 @@ package com.culflab.jwtauthsb;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -15,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.culflab.jwtauthsb.todo.controller.TodoController;
 import com.culflab.jwtauthsb.todo.service.TodoService;
+import com.culflab.jwtauthsb.authentication.service.JwtService;
 import com.culflab.jwtauthsb.todo.service.handler.Todo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,12 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -36,13 +34,16 @@ import java.util.List;
 
 
 @WebMvcTest(TodoController.class)
-@WithMockUser
+@WithMockCustomUser
 public class TodoControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @MockBean
     private TodoService todoService;
+
+    @MockBean
+    private JwtService jwtService;
 
     private static final int CREATED_TODO_ID = 4;
     private static final int UPDATED_TODO_ID = 4;
@@ -60,7 +61,7 @@ public class TodoControllerTest {
         when(todoService.retrieveTodos(anyString())).thenReturn(mockList);
 
         //When
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/users/Jack/todos")
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/api/v1/users/Jack/todos")
                         .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -83,7 +84,7 @@ public class TodoControllerTest {
         Todo mockTodo = new Todo(1,"Jack", "Learn Spring MVC", new Date(), false);
         //When
         when(todoService.retrieveTodo(anyInt())).thenReturn(mockTodo);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/users/Jack/todos/1")
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/api/v1/users/Jack/todos/1")
                         .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -106,7 +107,7 @@ public class TodoControllerTest {
         when(todoService.addTodo(anyString(), anyString(), isNull(), anyBoolean())).thenReturn(mockTodo);
 
         //Then
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/users/Jack/todos")
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/v1/users/Jack/todos")
                                 .with(SecurityMockMvcRequestPostProcessors.csrf())
                                 .content(todo)
                                 .contentType(MediaType.APPLICATION_JSON))
@@ -126,7 +127,7 @@ public class TodoControllerTest {
         String todo = "{\"user\":\"Jack\",\"desc\":\"Learn\",\"done\":\"false\"}";
         when(todoService.addTodo(anyString(), anyString(), isNull(), anyBoolean())).thenReturn(mockTodo);
         //Then
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/users/Jack/todos")
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/v1/users/Jack/todos")
                             .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .content(todo)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -145,7 +146,7 @@ public class TodoControllerTest {
         when(todoService.update(mockTodo)).thenReturn(mockTodo);
 
         //Then
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put("/users/Jack/todos/"+UPDATED_TODO_ID)
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.put("/api/v1/users/Jack/todos/"+UPDATED_TODO_ID)
                                 .with(SecurityMockMvcRequestPostProcessors.csrf())
                             .content(todo)
                             .contentType(MediaType.APPLICATION_JSON))
@@ -164,7 +165,7 @@ public class TodoControllerTest {
         when(todoService.deleteById(anyInt())).thenReturn(mockTodo);
 
         //Then
-        mvc.perform(MockMvcRequestBuilders.delete("/users/Jack/Todos/"+mockTodo.getId())
+        mvc.perform(MockMvcRequestBuilders.delete("/api/v1/users/Jack/Todos/"+mockTodo.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().isNotFound());
