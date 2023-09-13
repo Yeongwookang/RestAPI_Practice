@@ -1,6 +1,6 @@
 package com.culflab.jwtauthsb.authentication.controller;
 
-import com.culflab.jwtauthsb.authentication.Service.AuthenticationService;
+import com.culflab.jwtauthsb.authentication.service.AuthenticationService;
 import com.culflab.jwtauthsb.authentication.handler.AuthenticationRequest;
 import com.culflab.jwtauthsb.authentication.handler.AuthenticationResponse;
 import com.culflab.jwtauthsb.authentication.handler.RegisterRequest;

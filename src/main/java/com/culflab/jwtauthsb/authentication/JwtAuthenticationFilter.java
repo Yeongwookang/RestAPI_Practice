@@ -1,6 +1,6 @@
 package com.culflab.jwtauthsb.authentication;
 
-import com.culflab.jwtauthsb.authentication.Service.JwtService;
+import com.culflab.jwtauthsb.authentication.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,6 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if(userAccount != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userAccount);
+
             if(jwtService.isTokenVaild(jwt, userDetails)){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()

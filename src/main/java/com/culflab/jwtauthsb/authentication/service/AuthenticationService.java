@@ -1,4 +1,4 @@
-package com.culflab.jwtauthsb.authentication.Service;
+package com.culflab.jwtauthsb.authentication.service;
 
 import com.culflab.jwtauthsb.authentication.handler.AuthenticationRequest;
 import com.culflab.jwtauthsb.authentication.handler.AuthenticationResponse;
